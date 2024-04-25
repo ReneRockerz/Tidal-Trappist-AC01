@@ -12,12 +12,12 @@ import {
     }[];
   }
   
-  export function Accordion({ data }: Props) {
+  export function Accordion({ data = [] }: Props) {
     return (
       <BaseAccordion type="single" collapsible className="w-full">
         {data.map((item, i) => {
           return (
-            <AccordionItem value={`item-${i.toFixed()}`}>
+            <AccordionItem value={`item-${i.toFixed()}`} key={i}>
               <AccordionTrigger>{item.title}</AccordionTrigger>
               <AccordionContent>{item.description}</AccordionContent>
             </AccordionItem>
