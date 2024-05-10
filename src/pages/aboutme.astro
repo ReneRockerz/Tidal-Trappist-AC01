@@ -1,29 +1,20 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import { buttonVariants } from '@/components/ui/button'
+
+import { BreadcrumbDemo } from '@/components/react/sector-a.tsx'
+import { Accordion } from '@/components/react/sector-b.tsx'
 import { title } from 'process';
 
-//prismjs + 
 import Prism from 'prismjs';
-
-//react-three-fiber
 import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber/native'
 import { useGLTF } from '@react-three/drei/native'
 import modelPath from './path/to/model.glb'
 import { OrbitControls } from '@react-three/drei/native'
 
-//react-dom
-import * as React from "react";
-
-//react-fullpage
+import React from 'react';
 import {SectionsContainer, Section} from 'react-fullpage';
-
-//shacdn-ui
-import { Button } from "@/components/ui/button"
-import { buttonVariants } from "@/components/ui/button"
-import { BreadcrumbDemo } from '@/components/react/sector-a.tsx'
-import { Accordion } from '@/components/react/sector-b.tsx'
-import { ReloadIcon } from "@radix-ui/react-icons"
 
 const accordionData = [
 	{
@@ -55,6 +46,7 @@ const breadcrumbItems = [
   { label: 'Components', href: '/docs/components' },
   { label: 'Breadcrumb' },
 ];
+
 
 ---
 
@@ -95,9 +87,4 @@ const breadcrumbItems = [
     </div>
   </section>
   <Accordion data={accordionData} client:load />
-  <BreadcrumbDemo items={breadcrumbItems} client:load />
-  <a href="/aboutme" client:load><Button>Please wait</Button></a>
-  <Button client:load>Please wait</Button>
-
-
 </BaseLayout>

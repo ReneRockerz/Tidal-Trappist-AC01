@@ -3,6 +3,8 @@ import HeadSEO from '@/components/HeadSEO.astro'
 import Footer from '@/components/Footer.astro'
 import Header from '@/components/Header.astro'
 
+//view transtions 
+import { ViewTransitions } from 'astro:transitions';
 interface Props {
   title?: string | undefined
   description?: string | undefined
@@ -15,6 +17,7 @@ const { title, description, ogImage } = Astro.props
 <html lang="en">
   <head>
     <HeadSEO title={title} description={description} ogImage={ogImage} />
+    <ViewTransitions />
   </head>
   <body class="min-h-screen bg-background font-sans antialiased">
     <div class="relative flex min-h-screen flex-col">
@@ -25,4 +28,23 @@ const { title, description, ogImage } = Astro.props
       <Footer />
     </div>
   </body>
+  <script is:inline>
+    function setDarkMode(document) {
+      let theme = localStorage.darkMode ? 'dark' : 'light';
+      document.documentElement.dataset.theme = theme;
+    }
+  
+    setDarkMode(document);
+  
+    document.addEventListener('astro:before-swap', ev => {
+      // Pass the incoming document to set the theme on it
+      setDarkMode(ev.newDocument);
+    });
+  </script>
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      // This only runs once.
+      setupStuff();
+    }, { once: true });
+  </script>
 </html>
