@@ -3,8 +3,16 @@ import HeadSEO from '@/components/HeadSEO.astro'
 import Footer from '@/components/Footer.astro'
 import Header from '@/components/Header.astro'
 
-//view transtions 
-import { ViewTransitions } from 'astro:transitions';
+//view transtions
+import { ViewTransitions } from 'astro:transitions'
+
+//fullpage.js
+import 'fullpage.js/dist/fullpage.css'
+import fullpage from 'fullpage.js'
+
+//fullpage.css
+import '@/styles/fullpage.css'
+
 interface Props {
   title?: string | undefined
   description?: string | undefined
@@ -17,34 +25,103 @@ const { title, description, ogImage } = Astro.props
 <html lang="en">
   <head>
     <HeadSEO title={title} description={description} ogImage={ogImage} />
+    <Header />
     <ViewTransitions />
   </head>
   <body class="min-h-screen bg-background font-sans antialiased">
     <div class="relative flex min-h-screen flex-col">
-      <Header />
-      <main class="flex-auto">
+      <main class="flex-auto" id="fullpage">
         <slot />
       </main>
-      <Footer />
+      <div class="section-indicator"></div>
     </div>
-  </body>
-  <script is:inline>
-    function setDarkMode(document) {
-      let theme = localStorage.darkMode ? 'dark' : 'light';
-      document.documentElement.dataset.theme = theme;
-    }
-  
-    setDarkMode(document);
-  
-    document.addEventListener('astro:before-swap', ev => {
-      // Pass the incoming document to set the theme on it
-      setDarkMode(ev.newDocument);
-    });
-  </script>
-  <script>
+    <script is:inline>
+      function setDarkMode(document) {
+        let theme = localStorage.darkMode ? 'dark' : 'light'
+        document.documentElement.dataset.theme = theme
+      }
+      setDarkMode(document)
+      document.addEventListener('astro:before-swap', (ev) => {
+        // Pass the incoming document to set the theme on it
+        setDarkMode(ev.newDocument)
+      })
+    </script>
+    <!-- <script>
     document.addEventListener('astro:page-load', () => {
       // This only runs once.
       setupStuff();
     }, { once: true });
+  </script> -->
+  <script>
+    import fullpage from 'fullpage.js'
+  
+    new fullpage('#fullpage', {
+      licenseKey: '4Q0M9-M1O8H-VKPRI-7J017-UXHPO',
+      scrollingSpeed: 650,
+      navigation: true,
+      navigationPosition: 'right',
+      navigationTooltips: [
+        'Section 1',
+        'Section 2',
+        'Section 3',
+        'Section 4',
+      ],
+      lazyLoading: true,
+      observer: true,
+      credits: {
+        enabled: false,
+        label: 'Made with fullPage.js',
+        position: 'right',
+      },
+      slidesNavigation: true,
+      slidesNavPosition: 'bottom',
+      afterLoad: function(origin, destination, direction) {
+        const sections = document.querySelectorAll('.section:not(.fp-auto-height)');
+        const totalSections = sections.length;
+        const sectionIndicator = document.querySelector('.section-indicator');
+  
+        if (destination.index < totalSections) {
+          sectionIndicator.textContent = `|||| ${destination.index + 1}/${totalSections}`;
+          sectionIndicator.classList.remove('absolute');
+          sectionIndicator.style.position = 'fixed'; // Ensuring it is fixed for content sections
+        } else {
+          sectionIndicator.textContent = `|||| ${totalSections}/${totalSections}`;
+          sectionIndicator.classList.add('absolute'); // Ensure it is absolute for the footer
+          sectionIndicator.style.position = 'absolute';
+        }
+      },
+      beforeLeave: function(origin, destination, direction) {
+        const sectionIndicator = document.querySelector('.section-indicator');
+        const sections = document.querySelectorAll('.section:not(.fp-auto-height)');
+        const lastContentIndex = sections.length - 1; // Index of the last content section (Section 4)
+  
+        if (origin.index === lastContentIndex && destination.index === lastContentIndex + 1 && direction === 'down') {
+          // Transition to absolute before scrolling to the footer
+          sectionIndicator.classList.add('absolute');
+          sectionIndicator.style.position = 'absolute';
+        } else if (origin.index === lastContentIndex + 1 && destination.index === lastContentIndex && direction === 'up') {
+          // Transition to fixed when coming back up to Section 4 from the footer
+          sectionIndicator.classList.remove('absolute');
+          sectionIndicator.style.position = 'fixed';
+        }
+      },
+      onLeave: function (origin, destination, direction) {
+        const footerIndex = document.querySelectorAll('.section').length - 1;
+        const navigationItems = document.querySelectorAll('#fp-nav ul li');
+  
+        if (destination.index === footerIndex) {
+          navigationItems[footerIndex].style.display = 'none';
+        }
+      },
+      afterRender: function () {
+        const footerIndex = document.querySelectorAll('.section').length - 1;
+        const navigationItems = document.querySelectorAll('#fp-nav ul li');
+        navigationItems[footerIndex].style.display = 'none';
+      },
+    })
+  
   </script>
+  
+  
+  </body>
 </html>

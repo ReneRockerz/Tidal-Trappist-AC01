@@ -1,0 +1,55 @@
+/* Customize the navigation bullets */
+#fp-nav ul li {
+    margin: 60px 0;
+  }
+  
+  #fp-nav ul li a span {
+    background-color: #ff5f45;
+    width: 24px;
+    height: 4px;
+    margin: -2px 0 0 -12px;
+    border-radius: 0;
+  }
+  
+  /* Customize the active navigation bullet */
+  #fp-nav ul li a.active span {
+    background-color: #fff;
+    width: 32px;
+    height: 4px;
+    margin: -2px 0 0 -16px;
+  }
+  
+  /* Customize the navigation bullet on hover */
+  #fp-nav ul li:hover a span {
+    background-color: #fff;
+    width: 32px;
+    height: 4px;
+    margin: -2px 0 0 -16px;
+  }
+  
+  /* Show the tooltip instantly */
+  #fp-nav ul li .fp-tooltip {
+    opacity: 1;
+    top: -10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .section-indicator {
+    position: fixed;
+    top: 95%;
+    right: 40px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    z-index: 999;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .section[data-tooltip="Section 4"] .section-indicator {
+    position: absolute;
+    top: 95%;
+    right: 40px;
+    transform: translateY(-50%);
+  }

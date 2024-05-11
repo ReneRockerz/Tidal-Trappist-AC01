@@ -15,9 +15,6 @@ import { OrbitControls } from '@react-three/drei/native'
 //react-dom
 import * as React from "react";
 
-//react-fullpage
-import {SectionsContainer, Section} from 'react-fullpage';
-
 //shacdn-ui
 import { Button } from "@/components/ui/button"
 import { buttonVariants } from "@/components/ui/button"
@@ -25,79 +22,34 @@ import { BreadcrumbDemo } from '@/components/react/sector-a.tsx'
 import { Accordion } from '@/components/react/sector-b.tsx'
 import { ReloadIcon } from "@radix-ui/react-icons"
 
-const accordionData = [
-	{
-		title: "Is it accessible?",
-		description: "Yes. It adheres to the WAI-ARIA design pattern.",
-	},
-	{
-		title: "Is it styled?",
-		description:
-			"Yes. It comes with default styles that matches the other components' aesthetic.",
-	},
-	{
-		title: "Is it animated?",
-		description:
-			"Yes. It's animated by default, but you can disable it if you prefer.",
-	},
-];
+//fullpage.js-content
+import Section1 from '@/components/react/fp-content-1.tsx';
+import Section2 from '@/components/react/fp-content-2.tsx';
+import Section3 from '@/components/react/fp-content-3.tsx';
+import Section4 from '@/components/react/fp-content-4.tsx';
 
-const breadcrumbItems = [
-  { label: 'Home', href: '/' },
-  {
-    label: 'Menu',
-    menu: [
-      { label: 'Documentation', href: '/docs' },
-      { label: 'Themes', href: '/themes' },
-      { label: 'GitHub', href: 'https://github.com' },
-    ],
-  },
-  { label: 'Components', href: '/docs/components' },
-  { label: 'Breadcrumb' },
-];
+//darkmode toggle
+import ThemeToggle from '@/components/ThemeToggle.astro'
+
+//footer
+import Footer from '@/components/Footer.astro'
 
 ---
-
-<BaseLayout
-  title="Astro Shadcn UI Template"
-  description="This template helps you build apps with Astro, Tailwind CSS, and Shadcn UI."
->
-  <section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-    <div class="flex max-w-[980px] flex-col items-start gap-2">
-      <h1
-        class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl"
-      >
-        Astro Shadcn UI Template <br class="hidden sm:inline" />
-        built with Radix UI and Tailwind CSS.
-      </h1>
-      <p class="max-w-[700px] text-lg text-muted-foreground">
-        Accessible and customizable components that you can copy and paste into
-        your apps. Free. Open Source.
-      </p>
-    </div>
-    <div class="flex gap-4">
-      <a
-        href="https://ui.shadcn.com"
-        target="_blank"
-        rel="noreferrer"
-        class={buttonVariants()}
-      >
-        Documentation
-      </a>
-      <a
-        href="https://github.com/AREA44/astro-shadcn-ui-template"
-        target="_blank"
-        rel="noreferrer"
-        class={buttonVariants({ variant: 'outline' })}
-      >
-        GitHub
-      </a>
-    </div>
-  </section>
-  <Accordion data={accordionData} client:load />
-  <BreadcrumbDemo items={breadcrumbItems} client:load />
-  <a href="/aboutme" client:load><Button>Please wait</Button></a>
-  <Button client:load>Please wait</Button>
-
-
+<BaseLayout title="Seaborn" description=":3">
+  <ThemeToggle />
+  <div class="section" data-tooltip="Section 1">
+    <Section1 client:load />
+  </div>
+  <div class="section" data-tooltip="Section 2">
+    <Section2 client:load />
+  </div>
+  <div class="section" data-tooltip="Section 3">
+    <Section3 client:load />
+  </div>
+  <div class="section" data-tooltip="Section 4">
+    <Section4 client:load />
+  </div>
+  <div class="section fp-auto-height">
+    <Footer />
+  </div>
 </BaseLayout>
