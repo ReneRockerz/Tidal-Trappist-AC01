@@ -5,12 +5,10 @@ import { title } from 'process';
 //prismjs + 
 import Prism from 'prismjs';
 
-//react-three-fiber
-import { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber/native'
-import { useGLTF } from '@react-three/drei/native'
-import modelPath from './path/to/model.glb'
-import { OrbitControls } from '@react-three/drei/native'
+//three-js 
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 //react-dom
 import * as React from "react";
@@ -23,10 +21,10 @@ import { Accordion } from '@/components/react/sector-b.tsx'
 import { ReloadIcon } from "@radix-ui/react-icons"
 
 //fullpage.js-content
-import Section1 from '@/components/react/fp-content-1.tsx';
-import Section2 from '@/components/react/fp-content-2.tsx';
-import Section3 from '@/components/react/fp-content-3.tsx';
-import Section4 from '@/components/react/fp-content-4.tsx';
+import Section1 from '@/components/astro/fp-content-1.astro';
+import Section2 from '@/components/astro/fp-content-2.astro';
+import Section3 from '@/components/astro/fp-content-3.astro';
+import Section4 from '@/components/astro/fp-content-4.astro';
 
 //darkmode toggle
 import ThemeToggle from '@/components/ThemeToggle.astro'
@@ -36,7 +34,6 @@ import Footer from '@/components/Footer.astro'
 
 ---
 <BaseLayout title="Seaborn" description=":3">
-  <ThemeToggle />
   <div class="section" data-tooltip="Section 1">
     <Section1 client:load />
   </div>
@@ -50,6 +47,17 @@ import Footer from '@/components/Footer.astro'
     <Section4 client:load />
   </div>
   <div class="section fp-auto-height">
-    <Footer />
+    <Footer client:load />
   </div>
+  <script>
+
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+  </script>
 </BaseLayout>

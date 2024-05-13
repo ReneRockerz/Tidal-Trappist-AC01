@@ -4,9 +4,8 @@
   }
   
   #fp-nav ul li a span {
-    background-color: #ff5f45;
-    width: 24px;
-    height: 4px;
+    width: 4px;
+    height: 24px;
     margin: -2px 0 0 -12px;
     border-radius: 0;
   }
@@ -14,17 +13,19 @@
   /* Customize the active navigation bullet */
   #fp-nav ul li a.active span {
     background-color: #fff;
-    width: 32px;
-    height: 4px;
-    margin: -2px 0 0 -16px;
+    width: 4px;
+    height: 28px;
+    margin: -2px 0 0 -16px
+    ;border-radius: 0;
   }
   
   /* Customize the navigation bullet on hover */
   #fp-nav ul li:hover a span {
     background-color: #fff;
-    width: 32px;
-    height: 4px;
+    width: 4px;
+    height: 28px;
     margin: -2px 0 0 -16px;
+    border-radius: 0;
   }
   
   /* Show the tooltip instantly */
