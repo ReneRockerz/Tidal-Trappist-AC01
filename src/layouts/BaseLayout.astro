@@ -51,7 +51,7 @@ const { title, description, ogImage } = Astro.props
       // This only runs once.
       setupStuff();
     }, { once: true });
-  </script> -->
+    </script> -->
     <script>
       import fullpage from 'fullpage.js'
 
@@ -59,13 +59,15 @@ const { title, description, ogImage } = Astro.props
         licenseKey: '4Q0M9-M1O8H-VKPRI-7J017-UXHPO',
         scrollingSpeed: 650,
         navigation: true,
+        showActiveTooltip: true,
         navigationPosition: 'right',
         navigationTooltips: [
-          'Section 1',
-          'Section 2',
-          'Section 3',
-          'Section 4',
+          '<a href="#section1">Section 1</a>',
+          '<a href="#section2">Section 2</a>',
+          '<a href="#section3">Section 3</a>',
+          '<a href="#section4">Section 4</a>'
         ],
+        anchors: ['section1', 'section2', 'section3', 'section4'],
         lazyLoading: true,
         observer: true,
         credits: {
